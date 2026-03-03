@@ -1,5 +1,7 @@
 # HelpUp
 
+🚀 **Live Preview:** [https://help-up-lzmk.vercel.app/](https://help-up-lzmk.vercel.app/)
+
 **HelpUp** is an interactive and reliable marketplace platform designed to effortlessly connect local skilled workers with customers who need everyday services. Whether you’re looking to hire for home cleaning, electrical repairs, or plumbing, or you're a skilled worker wanting to showcase your services locally, HelpUp is the bridge that brings your community together!
 
 <br />
