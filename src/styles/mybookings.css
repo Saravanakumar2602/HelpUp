@@ -1,0 +1,51 @@
+/* MyBookings Page Styles */
+.mybookings-page {
+  max-width: 700px;
+  margin: 40px auto 0 auto;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 4px 24px rgba(0,123,255,0.08);
+  padding: 32px 24px 24px 24px;
+  min-height: 400px;
+}
+
+.mybookings-page h1 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #007bff;
+  margin-bottom: 32px;
+  letter-spacing: 1px;
+}
+
+.mybookings-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* BookingCard overrides for MyBookings */
+.mybookings-page .card {
+  border: 1.5px solid #e3eafc;
+  border-radius: 14px;
+  background: linear-gradient(90deg, #f8fbff 0%, #eaf6ff 100%);
+  box-shadow: 0 2px 8px rgba(0,123,255,0.06);
+  padding: 20px 24px;
+  transition: box-shadow 0.2s;
+}
+.mybookings-page .card:hover {
+  box-shadow: 0 6px 24px rgba(0,123,255,0.13);
+}
+.mybookings-page .card h3 {
+  margin: 0 0 8px 0;
+  color: #0056b3;
+  font-size: 1.25rem;
+}
+.mybookings-page .card p {
+  margin: 4px 0;
+  color: #333;
+  font-size: 1.05rem;
+}
+.mybookings-page .card p:last-child {
+  font-weight: 500;
+  color: #007bff;
+}

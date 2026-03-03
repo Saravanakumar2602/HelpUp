@@ -1,0 +1,10 @@
+/* Button and card hover/click effects */
+.worker-job-item {
+  transition: box-shadow 0.2s, transform 0.15s, background 0.2s;
+}
+
+.worker-job-item:hover {
+  box-shadow: 0 4px 16px rgba(0, 123, 255, 0.13);
+  transform: translateY(-2px);
+  background: white;
+}
