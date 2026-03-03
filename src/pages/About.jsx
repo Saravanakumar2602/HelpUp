@@ -52,9 +52,9 @@ function About() {
           <img src="https://img.icons8.com/color/96/000000/share--v1.png" alt="Social" className="about-img" />
           <h2>Connect with Us</h2>
           <div className="about-socials">
-            <a href="#" aria-label="Facebook" className="about-social-icon">🌐</a>
-            <a href="#" aria-label="Twitter" className="about-social-icon">🐦</a>
-            <a href="#" aria-label="Instagram" className="about-social-icon">📸</a>
+            <a href="https://facebook.com/helpup" aria-label="Facebook" className="about-social-icon" target="_blank" rel="noopener noreferrer">🌐</a>
+            <a href="https://twitter.com/helpup" aria-label="Twitter" className="about-social-icon" target="_blank" rel="noopener noreferrer">🐦</a>
+            <a href="https://instagram.com/helpup" aria-label="Instagram" className="about-social-icon" target="_blank" rel="noopener noreferrer">📸</a>
           </div>
         </div>
       </div>
