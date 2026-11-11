@@ -1,51 +1,95 @@
-/* MyBookings Page Styles */
+/* src/styles/mybookings.css */
+
 .mybookings-page {
-  max-width: 700px;
-  margin: 40px auto 0 auto;
-  background: #fff;
-  border-radius: 18px;
-  box-shadow: 0 4px 24px rgba(0,123,255,0.08);
-  padding: 32px 24px 24px 24px;
-  min-height: 400px;
+  max-width: 960px;
+  margin: 16px auto 60px auto;
+  padding: 0 16px;
 }
 
-.mybookings-page h1 {
-  font-size: 2.2rem;
-  font-weight: 700;
-  color: #007bff;
+.mybookings-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
   margin-bottom: 32px;
-  letter-spacing: 1px;
+}
+
+.mybookings-header-row h1 {
+  font-size: 2.6rem;
+  font-weight: 900;
+  margin: 0 0 8px 0;
+  letter-spacing: -0.04em;
+  color: #0f172a;
+}
+
+.mybookings-subtitle {
+  color: #64748b;
+  margin: 0;
+  font-size: 1.1rem;
+  max-width: 540px;
+}
+
+/* --- Filter Tabs --- */
+.bookings-tabs {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding-bottom: 14px;
+  margin-bottom: 32px;
+  border-bottom: 1.5px solid #e2e8f0;
+}
+
+.tab-btn {
+  padding: 10px 22px;
+  border-radius: 9999px;
+  border: 1.5px solid #e2e8f0;
+  background: #ffffff;
+  color: #64748b;
+  font-size: 0.92rem;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  font-family: inherit;
+}
+
+.tab-btn:hover {
+  border-color: #cbd5e1;
+  color: #0f172a;
+}
+
+.tab-btn.active {
+  background: linear-gradient(135deg, #ff385c 0%, #e11d48 100%);
+  color: #ffffff;
+  border-color: transparent;
+  box-shadow: 0 4px 16px rgba(225, 29, 72, 0.3);
 }
 
 .mybookings-list {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 22px;
 }
 
-/* BookingCard overrides for MyBookings */
-.mybookings-page .card {
-  border: 1.5px solid #e3eafc;
-  border-radius: 14px;
-  background: linear-gradient(90deg, #f8fbff 0%, #eaf6ff 100%);
-  box-shadow: 0 2px 8px rgba(0,123,255,0.06);
-  padding: 20px 24px;
-  transition: box-shadow 0.2s;
+.empty-bookings-card {
+  text-align: center;
+  background: #ffffff;
+  border-radius: 28px;
+  padding: 60px 28px;
+  border: 1.5px dashed #cbd5e1;
+  box-shadow: 0 10px 30px -10px rgba(15, 23, 42, 0.05);
 }
-.mybookings-page .card:hover {
-  box-shadow: 0 6px 24px rgba(0,123,255,0.13);
+
+.empty-bookings-card h3 {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin-bottom: 10px;
 }
-.mybookings-page .card h3 {
-  margin: 0 0 8px 0;
-  color: #0056b3;
-  font-size: 1.25rem;
-}
-.mybookings-page .card p {
-  margin: 4px 0;
-  color: #333;
+
+.empty-bookings-card p {
+  color: #64748b;
   font-size: 1.05rem;
-}
-.mybookings-page .card p:last-child {
-  font-weight: 500;
-  color: #007bff;
+  margin: 0 0 24px 0;
 }

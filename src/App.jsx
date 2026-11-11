@@ -1,8 +1,10 @@
+// src/App.jsx
+import React, { useState, useEffect, useCallback } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { useState, useEffect } from "react";
 
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 import Home from "./pages/Home";
 import About from "./pages/About";
@@ -15,86 +17,103 @@ import WorkerProfile from "./pages/WorkerProfile";
 import BrowseWorkers from "./pages/BrowseWorkers";
 import BookWorker from "./pages/BookWorker";
 import MyBookings from "./pages/MyBookings";
-import NotFound from "./pages/NotFound";
 import AddJob from "./pages/AddJob";
+import NotFound from "./pages/NotFound";
 
-function App() {
-  // 🔥 global state for jobs persisted with localStorage
-  const [jobs, setJobs] = useState(() => {
-    const savedJobs = localStorage.getItem("helpup_jobs");
-    if (savedJobs) {
-      try {
-        return JSON.parse(savedJobs);
-      } catch (e) {
-        return [];
-      }
-    }
-    return [];
-  });
+import { AuthProvider } from "./context/AuthContext";
+import { ToastProvider } from "./context/ToastContext";
+import { initStorage, getAllJobs, getAllBookings } from "./services/storageService";
 
-  const [bookings, setBookings] = useState(() => {
-    const savedBookings = localStorage.getItem("helpup_bookings");
-    if (savedBookings) {
-      try {
-        return JSON.parse(savedBookings);
-      } catch (e) {
-        return [];
-      }
-    }
-    return [];
-  });
+function AppContent() {
+  const [jobs, setJobs] = useState([]);
+  const [bookings, setBookings] = useState([]);
+
+  const refreshData = useCallback(() => {
+    setJobs(getAllJobs());
+    setBookings(getAllBookings());
+  }, []);
 
   useEffect(() => {
-    localStorage.setItem("helpup_jobs", JSON.stringify(jobs));
-  }, [jobs]);
+    // Seed initial data if necessary
+    initStorage();
+    refreshData();
 
-  useEffect(() => {
-    localStorage.setItem("helpup_bookings", JSON.stringify(bookings));
-  }, [bookings]);
+    // Listen for storage events (e.g. cross-tab updates or manual dispatches)
+    const handleStorageUpdate = () => {
+      refreshData();
+    };
 
-  const handleAddJob = (job) => {
-    setJobs([...jobs, { id: jobs.length + 1, ...job }]);
-  };
-
-  const handleAddBooking = (booking) => {
-    setBookings([{ status: "Pending", ...booking }, ...bookings]);
-  };
+    window.addEventListener("storage", handleStorageUpdate);
+    return () => window.removeEventListener("storage", handleStorageUpdate);
+  }, [refreshData]);
 
   return (
     <Router>
       <Navbar />
-      <div className="main-container">
+      <main className="main-container">
         <Routes>
+          {/* Public Routes */}
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/services" element={<Services />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
-          <Route path="/customer-profile" element={<CustomerProfile />} />
+          <Route path="/browse" element={<BrowseWorkers onBookingSuccess={refreshData} />} />
+          <Route path="/book/:id" element={<BookWorker onAddBooking={refreshData} />} />
 
-          {/* Pass jobs to worker profile */}
+          {/* Customer Protected Routes */}
+          <Route
+            path="/customer-profile"
+            element={
+              <ProtectedRoute allowedRole="customer">
+                <CustomerProfile />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/my-bookings"
+            element={
+              <ProtectedRoute allowedRole="customer">
+                <MyBookings bookings={bookings} onRefreshData={refreshData} />
+              </ProtectedRoute>
+            }
+          />
+
+          {/* Worker Protected Routes */}
           <Route
             path="/worker-profile"
-            element={<WorkerProfile jobs={jobs} bookings={bookings} />}
+            element={
+              <ProtectedRoute allowedRole="worker">
+                <WorkerProfile jobs={jobs} bookings={bookings} onRefreshData={refreshData} />
+              </ProtectedRoute>
+            }
           />
-
-          {/* Add Job form */}
           <Route
             path="/add-job"
-            element={<AddJob onAddJob={handleAddJob} />}
+            element={
+              <ProtectedRoute allowedRole="worker">
+                <AddJob onAddJob={refreshData} />
+              </ProtectedRoute>
+            }
           />
 
-          {/* Browse jobs */}
-          <Route path="/browse" element={<BrowseWorkers jobs={jobs} />} />
-
-          <Route path="/book/:id" element={<BookWorker onAddBooking={handleAddBooking} />} />
-          <Route path="/my-bookings" element={<MyBookings bookings={bookings} />} />
+          {/* Fallback 404 */}
           <Route path="*" element={<NotFound />} />
         </Routes>
-      </div>
+      </main>
       <Footer />
     </Router>
+  );
+}
+
+function App() {
+  return (
+    <ToastProvider>
+      <AuthProvider>
+        <AppContent />
+      </AuthProvider>
+    </ToastProvider>
   );
 }
 
