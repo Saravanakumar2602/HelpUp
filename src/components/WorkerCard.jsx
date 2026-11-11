@@ -5,7 +5,7 @@ import Modal from "./Modal";
 import { useAuth } from "../context/AuthContext";
 import { useToast } from "../context/ToastContext";
 import { createBooking } from "../services/storageService";
-import { LocationIcon, StarIcon, ShieldCheckIcon, CalendarIcon, ClockIcon, ZapIcon, PhoneIcon } from "./Icons";
+import { LocationIcon, StarIcon, ShieldCheckIcon, CalendarIcon, ClockIcon, ZapIcon } from "./Icons";
 import "../styles/cards.css";
 
 function WorkerCard({ worker, onBookingSuccess }) {

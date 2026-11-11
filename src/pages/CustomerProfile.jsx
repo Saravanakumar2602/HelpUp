@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useToast } from "../context/ToastContext";
 import { getAllBookings } from "../services/storageService";
-import BookingCard from "../components/BookingCard";
 import "../styles/workerprofile.css";
 
 function CustomerProfile() {
@@ -24,7 +23,6 @@ function CustomerProfile() {
   const customerBookings = allBookings.filter(b => b.customerId === user?.id || b.customerEmail === user?.email);
 
   const pendingCount = customerBookings.filter(b => b.status === "Pending").length;
-  const confirmedCount = customerBookings.filter(b => b.status === "Confirmed").length;
   const completedCount = customerBookings.filter(b => b.status === "Completed").length;
 
   const handleChange = (e) => {

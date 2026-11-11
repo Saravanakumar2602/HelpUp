@@ -4,11 +4,9 @@ import { Link } from "react-router-dom";
 import {
   SparklesIcon,
   ShieldCheckIcon,
-  StarIcon,
   ZapIcon,
   AwardIcon,
   UsersIcon,
-  CheckIcon,
   ArrowRightIcon
 } from "../components/Icons";
 import "../styles/about.css";

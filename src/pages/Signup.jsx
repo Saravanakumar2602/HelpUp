@@ -8,7 +8,6 @@ import {
   SparklesIcon,
   ShieldCheckIcon,
   ZapIcon,
-  StarIcon,
   CheckIcon,
   LocationIcon,
   MailIcon,

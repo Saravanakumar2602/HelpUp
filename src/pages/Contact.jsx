@@ -8,7 +8,6 @@ import {
   SparklesIcon,
   ShieldCheckIcon,
   ArrowRightIcon,
-  ClockIcon,
   ZapIcon
 } from "../components/Icons";
 import "../styles/contact.css";

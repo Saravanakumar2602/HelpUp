@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useToast } from "../context/ToastContext";
-import { SparklesIcon, MailIcon, ArrowRightIcon } from "../components/Icons";
+import { SparklesIcon, MailIcon } from "../components/Icons";
 import "../styles/forms.css";
 
 function Login() {
